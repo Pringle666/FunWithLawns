@@ -1,14 +1,73 @@
 ﻿Module Module1
-
+    Class cCompany
+        Public business As String
+        Public name As String
+        Public number As String
+        Public address As String
+        Public Rate As Single
+        Public TotalHours As Integer
+        Public totalIncome As Single
+    End Class
     Class Client
         Public Name As String
         Public Address As String
         Public Phone As Integer
         Public Dates As Date
         Public time As Date
+
+        Public Complete As Boolean
     End Class
+    Dim company As New cCompany
     Dim completedClients As New List(Of Client)
     Dim clients As New List(Of Client)
+    Sub loadCompany()
+
+        'Check if the file exists
+        If IO.File.Exists("CompanyData.txt") Then
+
+
+            FileOpen(1, "CompanyData.txt", OpenMode.Input)
+            'while we are not end of file
+
+            company.business = LineInput(1)
+            company.name = LineInput(1)
+            company.address = LineInput(1)
+            company.number = LineInput(1)
+            company.Rate = LineInput(1)
+            company.TotalHours = LineInput(1)
+            company.totalIncome = LineInput(1)
+
+
+
+
+            'Close our file
+            FileClose(1)
+        End If
+
+    End Sub
+    Sub saveCompany()
+        FileOpen(1, "CompanyData.txt", OpenMode.Output)
+
+        PrintLine(1, company.business)
+        PrintLine(1, company.name)
+        PrintLine(1, company.address)
+        PrintLine(1, company.number)
+        PrintLine(1, company.Rate)
+        PrintLine(1, company.TotalHours)
+        PrintLine(1, company.totalIncome)
+
+        FileClose(1)
+    End Sub
+    Sub CompanyInfo()
+        Console.Clear()
+
+        Console.WriteLine("Welcome " & company.name)
+        Console.WriteLine("=====================================================================")
+        Console.WriteLine("Total completed hours: " & company.TotalHours)
+        Console.WriteLine("Total completed hours: " & company.totalIncome)
+        Console.WriteLine("=====================================================================")
+
+    End Sub
     Function GetBookings()
         Console.Clear()
         Dim index As Integer = 0
@@ -154,14 +213,21 @@
         End If
     End Sub
     Sub ViewBusinessCard()
+        Console.Clear()
 
+        Console.WriteLine("Company: " & company.business)
+        Console.WriteLine("Owner: " & company.name)
+        Console.WriteLine("Phone Number: " & company.number)
+        Console.WriteLine("Address: " & company.address)
+        Console.ReadLine()
     End Sub
     Sub Menu()
+
         Dim selection As Char
 
         Do
             Console.Clear()
-
+            CompanyInfo()
 
             Console.WriteLine("Select from one of the following menu options:")
             Console.WriteLine()
@@ -206,6 +272,7 @@
             End Select
             Console.Clear()
         Loop Until selection = "X"
+        saveCompany()
     End Sub
 
 
@@ -221,10 +288,43 @@
 
         Console.ReadKey()
         Console.Clear()
+        If IO.File.Exists("CompanyData.txt") Then
+            Console.Clear()
+
+        Else
+
+
+            Console.WriteLine("No company info has been found. We'll setup a profile before we begin")
+            Console.WriteLine()
+            Console.WriteLine("Press any key to continue...")
+            Console.ReadKey()
+            Console.Clear()
+            Console.WriteLine("Here you enter the details for your new company profile")
+            Console.WriteLine()
+            Console.Write("Company Name: ")
+            company.business = Console.ReadLine
+            Console.Write("Company owner's name: ")
+            company.name = Console.ReadLine
+            Console.Write("Company Contact number: ")
+            company.number = Console.ReadLine
+            Console.Write("Company Address: ")
+            company.address = Console.ReadLine
+            Console.Write("Company Hourly Rate: $")
+            company.Rate = Console.ReadLine
+            Console.WriteLine("Setup is complete")
+            Console.WriteLine()
+            Console.WriteLine("Press any key to continue...")
+            Console.ReadKey()
+        End If
         Menu()
     End Sub
     Sub Main()
+
+        loadCompany()
         start()
+
+
+
     End Sub
 
 End Module

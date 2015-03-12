@@ -16,3 +16,12 @@ E:\VB\Fun With Lawns\Fun With Lawns\Fun With Lawns\bin\Debug\Fun With Lawns.pdb
 E:\VB\Fun With Lawns\Fun With Lawns\Fun With Lawns\bin\Debug\Fun With Lawns.xml
 E:\VB\Fun With Lawns\Fun With Lawns\Fun With Lawns\obj\Debug\Fun_With_Lawns.Resources.resources
 E:\VB\Fun With Lawns\Fun With Lawns\Fun With Lawns\obj\Debug\Fun With Lawns.vbproj.GenerateResource.Cache
+E:\VB\Fun With Lawns\Fun With Lawns\bin\Debug\Fun With Lawns.exe.config
+E:\VB\Fun With Lawns\Fun With Lawns\obj\Debug\Fun With Lawns.exe
+E:\VB\Fun With Lawns\Fun With Lawns\obj\Debug\Fun With Lawns.xml
+E:\VB\Fun With Lawns\Fun With Lawns\obj\Debug\Fun With Lawns.pdb
+E:\VB\Fun With Lawns\Fun With Lawns\bin\Debug\Fun With Lawns.exe
+E:\VB\Fun With Lawns\Fun With Lawns\bin\Debug\Fun With Lawns.pdb
+E:\VB\Fun With Lawns\Fun With Lawns\bin\Debug\Fun With Lawns.xml
+E:\VB\Fun With Lawns\Fun With Lawns\obj\Debug\Fun_With_Lawns.Resources.resources
+E:\VB\Fun With Lawns\Fun With Lawns\obj\Debug\Fun With Lawns.vbproj.GenerateResource.Cache
