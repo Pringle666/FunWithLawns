@@ -44,6 +44,25 @@
             FileClose(1)
         End If
 
+
+        If IO.File.Exists("ClientsData.txt") Then
+
+            FileOpen(1, "ClientsData.txt", OpenMode.Input)
+
+            While Not EOF(1)
+                Dim newclient As New Client
+                
+                newclient.Name = LineInput(1)
+                newclient.Address = LineInput(1)
+                newclient.Phone = LineInput(1)
+                newclient.Dates = LineInput(1)
+                newclient.time = LineInput(1)
+                    'PrintLine(1, clients(i).Complete)
+
+                clients.Add(newclient)
+            End While
+            FileClose(1)
+        End If
     End Sub
     Sub saveCompany()
         FileOpen(1, "CompanyData.txt", OpenMode.Output)
@@ -56,6 +75,20 @@
         PrintLine(1, company.TotalHours)
         PrintLine(1, company.totalIncome)
 
+        FileClose(1)
+
+
+
+        FileOpen(1, "ClientsData.txt", OpenMode.Output)
+
+        For i = 0 To clients.Count - 1
+            PrintLine(1, clients(i).Name)
+            PrintLine(1, clients(i).Address)
+            PrintLine(1, clients(i).Phone)
+            PrintLine(1, clients(i).Dates)
+            PrintLine(1, clients(i).time)
+            'PrintLine(1, clients(i).Complete)
+        Next
         FileClose(1)
     End Sub
     Sub CompanyInfo()
@@ -70,12 +103,12 @@
     End Sub
     Function GetBookings()
         Console.Clear()
-        Dim index As Integer = 0
+
         Console.WriteLine("Number of Client's currently in program: " & clients.Count)
         Console.WriteLine("Here's the client's currently in the program")
 
         Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
-        Console.WriteLine("======================================================")
+        Console.WriteLine("=============================================================")
 
 
         For i = 0 To clients.Count - 1
@@ -84,11 +117,11 @@
 
         Next
 
-        Console.Write("Enter the index of the client: ")
+        'Console.Write("Enter the index of the client: ")
 
-        index = Console.ReadLine
+        'index = Console.ReadLine
 
-        Return index
+        ' Return index
     End Function
 
     Sub AddBooking()
@@ -189,13 +222,73 @@
         Console.ReadLine()
     End Sub
     Sub EditIncompleteBookingsDetails()
+        Console.Clear()
+        Dim index As Integer = GetBookings()
+        If index >= 0 And index < clients.Count Then
+            Dim selection As Char
+            Console.WriteLine("Do you wish to edit a client? Y/N: ")
+            selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+            Select Case selection
+                Case "Y"
+                    Console.Write("Enter the index of the client you wish to edit: ")
 
+                    index = Console.ReadLine
+
+                    Console.Write("Clients name: ")
+                    clients(index).Name = Console.ReadLine
+
+                    Console.Write("Client's's address: ")
+                    clients(index).Address = Console.ReadLine
+
+                    Console.Write("Client's's phone number: ")
+                    clients(index).Phone = Console.ReadLine
+
+                    Console.Write("Date of the booking (dd/mm/yy): ")
+                    clients(index).Dates = Console.ReadLine
+
+                    Console.Write("Time of the booking (hh:mm am/pm): ")
+                    clients(index).time = Console.ReadLine
+                Case "N"
+                    Console.WriteLine("Press any key to return to menu")
+                    Console.ReadKey()
+            End Select
+            
+        End If
+        Console.Clear()
     End Sub
     Sub RemoveABooking()
+        Console.Clear()
+        Dim index As Integer = GetBookings()
 
+
+        Console.Write("Enter the index of the client you wish to remove: ")
+
+        index = Console.ReadLine
+        If index >= 0 And index < clients.Count Then
+            Console.Write("Do you wish to remove this client? Y/N: ")
+            Dim selection As Char
+            selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+
+            Select Case selection
+                Case "Y"
+                    clients.RemoveAt(index)
+                    Console.WriteLine("Booking Removed!")
+                    Console.ReadKey()
+                Case "N"
+
+                    Console.Clear()
+                    Console.WriteLine("Booking kept")
+                    Console.WriteLine("Press any key to continue")
+                    Console.ReadKey()
+            End Select
+        End If
     End Sub
     Sub CompleteBooking()
         Dim index As Integer = GetBookings()
+        Dim user As Integer
+        Console.Write("Enter the index of the client: ")
+
+        user = Console.ReadLine
         Dim newClient As New Client
         If index >= 0 And index < clients.Count Then
 
@@ -206,7 +299,7 @@
                 Case "Y"
 
                     Console.WriteLine("Booking Completed")
-                    Console.ReadLine()
+
                 Case "N"
                     Console.Clear()
             End Select
