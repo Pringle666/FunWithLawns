@@ -97,7 +97,7 @@
         Console.WriteLine("Welcome " & company.name)
         Console.WriteLine("=====================================================================")
         Console.WriteLine("Total completed hours: " & company.TotalHours)
-        Console.WriteLine("Total completed hours: " & company.totalIncome)
+        Console.WriteLine("Total Income : " & FormatCurrency(company.totalIncome))
         Console.WriteLine("=====================================================================")
 
     End Sub
@@ -193,7 +193,8 @@
         If clients.Count = 0 Then
             Console.Clear()
             Console.WriteLine("No bookings available!")
-
+            Console.WriteLine("Press any key to return to menu...")
+            Console.ReadKey()
         Else
 
             Dim index As Integer = GetBookings(False)
@@ -205,7 +206,7 @@
     End Sub
     Sub ViewCompleteBookings()
 
-
+        
         Console.Clear()
 
         Console.WriteLine("Here's the client's currently completed in the program")
@@ -223,7 +224,29 @@
         Console.ReadKey()
     End Sub
     Sub CheckIncompleteBookingsForNext7Days()
+        If clients.Count = 0 Then
+            Console.WriteLine("You have no bookings")
+            Console.Write("Press any key to exit...")
+            Console.ReadKey()
+        Else
+            Console.Clear()
 
+            Console.WriteLine("Here's the client's coming up in the next 7 days")
+
+            Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
+            Console.WriteLine("=============================================================")
+
+
+            For i = 0 To clients.Count - 1
+                If clients(i).Complete = False And clients(i).Dates <= Now.AddDays(7) And clients(i).Dates >= Now Then
+                    Console.WriteLine("{0,-5} {1,-20} {2,-20} {3, -20}", i, clients(i).Name, clients(i).Dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+                End If
+            Next
+        End If
+
+
+        Console.WriteLine("Press any key to return to menu...")
+        Console.ReadKey()
     End Sub
     Sub ViewIncompleteBookingsDetails()
         Dim index As Integer = GetBookings(False)
@@ -323,6 +346,7 @@
     Sub CompleteBooking()
         Dim index As Integer = GetBookings(False)
         Dim user As Integer
+        
         Console.Write("Enter the index of the client: ")
 
         user = Console.ReadLine
@@ -330,14 +354,19 @@
         If index >= 0 And index < clients.Count Then
 
             Console.Write("Do you want to complete this booking y/n?:")
+
             Dim selection As Char
             selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
             Select Case selection
                 Case "Y"
-
-                    Console.WriteLine("Booking Completed")
+                    Console.WriteLine("")
+                    Console.Write("Booking Completed")
                     clients(index).Complete = True
+                    Console.WriteLine("")
+                    Console.Write("How many hours did it take to complete the job?: ")
+                    company.TotalHours += Console.ReadLine
 
+                    company.totalIncome = company.TotalHours * company.Rate
                 Case "N"
                     Console.Clear()
             End Select
@@ -345,11 +374,13 @@
     End Sub
     Sub ViewBusinessCard()
         Console.Clear()
-
+        Console.SetCursorPosition(10, 5)
+        Console.WriteLine("===============================================")
         Console.WriteLine("Company: " & company.business)
         Console.WriteLine("Owner: " & company.name)
         Console.WriteLine("Phone Number: " & company.number)
         Console.WriteLine("Address: " & company.address)
+        Console.WriteLine("===============================================")
         Console.ReadLine()
     End Sub
     Sub Menu()
@@ -357,6 +388,8 @@
         Dim selection As Char
 
         Do
+            Console.BackgroundColor = ConsoleColor.DarkGreen
+            Console.ForegroundColor = ConsoleColor.Cyan
             Console.Clear()
             CompanyInfo()
 
@@ -375,7 +408,7 @@
             Console.WriteLine()
             Console.WriteLine("(I) View business card")
             Console.WriteLine()
-            Console.WriteLine("(X) Exit")
+            Console.WriteLine("(X) Save and Exit")
 
 
             selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
@@ -409,6 +442,10 @@
 
 
     Sub start()
+
+        Console.BackgroundColor = ConsoleColor.DarkGreen
+        Console.ForegroundColor = ConsoleColor.Cyan
+        Console.Clear()
         Console.SetCursorPosition(23, 0)
         Console.WriteLine("Welcome to Fun With Lawns v0.1")
         Console.SetCursorPosition(19, 1)
