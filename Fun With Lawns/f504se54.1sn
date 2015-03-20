@@ -95,10 +95,10 @@
         Console.Clear()
 
         Console.WriteLine("Welcome " & company.name)
-        Console.WriteLine("═════════════════════════════════════════════════════════════")
+        Console.WriteLine("=====================================================================")
         Console.WriteLine("Total completed hours: " & company.TotalHours)
         Console.WriteLine("Total Income : " & FormatCurrency(company.totalIncome))
-        Console.WriteLine("═════════════════════════════════════════════════════════════")
+        Console.WriteLine("=====================================================================")
 
     End Sub
     Function GetBookings(complete As Boolean)
@@ -108,7 +108,7 @@
         Console.WriteLine("Here's the client's currently in the program")
 
         Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
-        Console.WriteLine("══════════════════════════════════════════════════════════════")
+        Console.WriteLine("=============================================================")
 
 
 
@@ -130,66 +130,56 @@
 
     Sub AddBooking()
         Dim NewClient As New Client
-        Dim leave As Integer
-        Dim selection As Char
+
         'Gather the input
 
         Console.Clear()
-        Console.Write("Press -1 to cancel or any other key and enter to continue adding a client: ")
-        leave = Console.ReadLine
-        If leave = -1 Then
-            Menu()
+        Console.WriteLine("I'm going to add a student!")
 
-        Else
-            Console.Write("Client's name: ")
-            NewClient.Name = Console.ReadLine
+        Console.Write("Client's name: ")
+        NewClient.Name = Console.ReadLine
 
-            Console.Write("Client's's address: ")
-            NewClient.Address = Console.ReadLine
+        Console.Write("Client's's address: ")
+        NewClient.Address = Console.ReadLine
 
-            Console.Write("Client's's phone number: ")
-            NewClient.Phone = Console.ReadLine
+        Console.Write("Client's's phone number: ")
+        NewClient.Phone = Console.ReadLine
 
-            Console.Write("Date of the booking (dd/mm/yy): ")
-            NewClient.Dates = Console.ReadLine
+        Console.Write("Date of the booking (dd/mm/yy): ")
+        NewClient.Dates = Console.ReadLine
 
-            Console.Write("Time of the booking (hh:mm am/pm): ")
-            NewClient.time = Console.ReadLine
+        Console.Write("Time of the booking (hh:mm am/pm): ")
+        NewClient.time = Console.ReadLine
 
-            'Add to the list 
-            'clients.Add(NewClient)
+        'Add to the list 
+        'clients.Add(NewClient)
 
-            Console.Clear()
-            ' BookingDetailsYesOrNo()
-            Console.WriteLine("Booking details are as follows:")
+        Console.Clear()
+        ' BookingDetailsYesOrNo()
+        Console.WriteLine("Booking details are as follows:")
 
 
-            Console.WriteLine("Name :" & NewClient.Name)
-            Console.WriteLine("Address :" & NewClient.Address)
-            Console.WriteLine("Phone number :" & NewClient.Phone)
-            Console.WriteLine("Date of booking :" & NewClient.Dates)
-            Console.WriteLine("Time of booking :" & NewClient.time)
+        Console.WriteLine("Name :" & NewClient.Name)
+        Console.WriteLine("Address :" & NewClient.Address)
+        Console.WriteLine("Phone number :" & NewClient.Phone)
+        Console.WriteLine("Date of booking :" & NewClient.Dates)
+        Console.WriteLine("Time of booking :" & NewClient.time)
 
-            Console.WriteLine("Are these correct? Y/N")
+        Console.WriteLine("Are these correct? Y/N")
 
+        Dim selection As Char
+        selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
 
-            selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
-
-            Select Case selection
-                Case "Y"
-                    clients.Add(NewClient)
-                    Console.WriteLine("Booking added!")
-                    ' Console.ReadLine
-                Case "N"
-                    clients.Remove(NewClient)
-                    Console.Clear()
-            End Select
-            'Console.ReadLine()
-        End If
-
-
-
-       
+        Select Case selection
+            Case "Y"
+                clients.Add(NewClient)
+                Console.WriteLine("Booking added!")
+                ' Console.ReadLine
+            Case "N"
+                clients.Remove(NewClient)
+                Console.Clear()
+        End Select
+        'Console.ReadLine()
     End Sub
     'Sub 
 
@@ -222,7 +212,7 @@
         Console.WriteLine("Here's the client's currently completed in the program")
 
         Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
-        Console.WriteLine("═════════════════════════════════════════════════════════════")
+        Console.WriteLine("=============================================================")
 
 
         For i = 0 To clients.Count - 1
@@ -244,7 +234,7 @@
             Console.WriteLine("Here's the client's coming up in the next 7 days")
 
             Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
-            Console.WriteLine("═════════════════════════════════════════════════════════════")
+            Console.WriteLine("=============================================================")
 
 
             For i = 0 To clients.Count - 1
@@ -404,13 +394,13 @@
         Console.WriteLine("Address: " & company.address)
         Console.SetCursorPosition(10, 10)
         Console.WriteLine("╚══════════════════════════════════════════════╝")
-        Console.SetCursorPosition(57, 6)
+        Console.SetCursorPosition(50, 6)
         Console.WriteLine("║")
-        Console.SetCursorPosition(57, 7)
+        Console.SetCursorPosition(20, 7)
         Console.WriteLine("║")
-        Console.SetCursorPosition(57, 8)
+        Console.SetCursorPosition(20, 8)
         Console.WriteLine("║")
-        Console.SetCursorPosition(57, 9)
+        Console.SetCursorPosition(20, 9)
         Console.WriteLine("║")
         Console.ReadLine()
     End Sub
@@ -419,12 +409,12 @@
         Dim selection As Char
 
         Do
-            Console.BackgroundColor = ConsoleColor.Black
+            Console.BackgroundColor = ConsoleColor.DarkGreen
             Console.ForegroundColor = ConsoleColor.Green
             Console.Clear()
             CompanyInfo()
 
-            Console.WriteLine("Here's todays clients")
+            Console.WriteLine("Here's today's clients")
 
             Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
             Console.WriteLine("═════════════════════════════════════════════════════════════")
@@ -481,106 +471,22 @@
             Console.Clear()
         Loop Until selection = "X"
         saveCompany()
-
-        Console.Clear()
-        Dim savingWord As String = "Saving"
-        Dim saving As Integer
-        Dim finished As Boolean = False
-        Dim rand As New Random
-        Dim delaycount As Integer = rand.Next(0, 30)
-        Dim count As Integer = 0
-
-
-        While Not finished
-            'By Jarod "The Little Master" Inzitari
-            'slow down
-            Threading.Thread.Sleep(20)
-
-            Console.SetCursorPosition(saving + 34, 10)
-            Console.BackgroundColor = ConsoleColor.Blue
-
-            'Put down 10 rand numbers
-            For i = saving To 5
-                Console.Write(savingWord(i))
-
-            Next
-
-            count += 1
-
-            'Check if we hit the threshold
-
-            If count = delaycount Then
-                Console.BackgroundColor = ConsoleColor.Red
-                Console.SetCursorPosition(saving + 34, 10)
-                Console.Write(savingWord(saving))
-
-                saving += 1
-                count = 0
-                delaycount = rand.Next(0, 30)
-
-
-            End If
-
-            If saving = 6 Then
-                finished = True
-                Console.BackgroundColor = ConsoleColor.Black
-            End If
-
-
-
-        End While
-
-
-        Console.SetCursorPosition(saving + 28, 10)
-        Console.BackgroundColor = ConsoleColor.Red
-
-        Console.WriteLine("Goodbye")
-        Threading.Thread.Sleep(1140)
-
-        'By Jarod "The Little Master" Inzitari
-
-
-
     End Sub
 
 
 
     Sub start()
 
-        Console.BackgroundColor = ConsoleColor.Black
+        Console.BackgroundColor = ConsoleColor.DarkGreen
         Console.ForegroundColor = ConsoleColor.Green
         Console.Clear()
-        Console.SetCursorPosition(17, 6)
-        Console.WriteLine("╔════════════════════════════════════════╗")
-        Console.SetCursorPosition(17, 7)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(17, 8)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(17, 9)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(17, 10)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(17, 11)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(58, 7)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(58, 8)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(58, 9)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(58, 10)
-        Console.WriteLine("║")
-        Console.SetCursorPosition(58, 11)
-        Console.WriteLine("║")
         Console.SetCursorPosition(23, 8)
         Console.WriteLine("Welcome to Fun With Lawns v0.1")
         Console.SetCursorPosition(19, 9)
         Console.WriteLine("Your all in one lawn management system")
         Console.WriteLine("")
-        Console.SetCursorPosition(24, 10)
+        Console.SetCursorPosition(23.5, 10)
         Console.WriteLine("Press any key to continue...")
-        Console.SetCursorPosition(17, 12)
-        Console.WriteLine("╚════════════════════════════════════════╝")
 
         Console.ReadKey()
         Console.Clear()
