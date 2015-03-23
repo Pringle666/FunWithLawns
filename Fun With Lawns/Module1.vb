@@ -93,23 +93,29 @@
     End Sub
     Sub CompanyInfo()
         Console.Clear()
-
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Welcome " & company.name)
+        Console.ForegroundColor = ConsoleColor.Green
         Console.WriteLine("═════════════════════════════════════════════════════════════")
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Total completed hours: " & company.TotalHours)
-        Console.WriteLine("Total Income : " & FormatCurrency(company.totalIncome))
+        Console.WriteLine("Total income : " & FormatCurrency(company.totalIncome))
+        Console.WriteLine("Hourly rate: " & FormatCurrency(company.Rate))
+        Console.ForegroundColor = ConsoleColor.Green
         Console.WriteLine("═════════════════════════════════════════════════════════════")
 
     End Sub
     Function GetBookings(complete As Boolean)
         Console.Clear()
         Dim index As Integer = 0
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Number of Client's currently in program: " & clients.Count)
         Console.WriteLine("Here's the client's currently in the program")
 
         Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
+        Console.ForegroundColor = ConsoleColor.Green
         Console.WriteLine("══════════════════════════════════════════════════════════════")
-
+        Console.ForegroundColor = ConsoleColor.Yellow
 
 
         For i = 0 To clients.Count - 1
@@ -119,7 +125,8 @@
                 Console.WriteLine("{0,-5} {1,-20} {2,-20} {3, -20}", i, clients(i).Name, clients(i).Dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
             End If
         Next
-        
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.WriteLine("══════════════════════════════════════════════════════════════")
 
         'Console.Write("Enter the index of the client: ")
 
@@ -135,25 +142,36 @@
         'Gather the input
 
         Console.Clear()
-        Console.Write("Press -1 to cancel or any other key and enter to continue adding a client: ")
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.Write("Press -1 to cancel or 0 and enter to continue adding a client: ")
+        Console.ForegroundColor = ConsoleColor.Yellow
         leave = Console.ReadLine
         If leave = -1 Then
+            Console.Clear()
             Menu()
 
         Else
+            Console.ForegroundColor = ConsoleColor.Green
             Console.Write("Client's name: ")
+            Console.ForegroundColor = ConsoleColor.Yellow
             NewClient.Name = Console.ReadLine
-
+            Console.ForegroundColor = ConsoleColor.Green
             Console.Write("Client's's address: ")
+            Console.ForegroundColor = ConsoleColor.Yellow
             NewClient.Address = Console.ReadLine
-
+            Console.ForegroundColor = ConsoleColor.Green
             Console.Write("Client's's phone number: ")
+            Console.ForegroundColor = ConsoleColor.Yellow
             NewClient.Phone = Console.ReadLine
 
-            Console.Write("Date of the booking (dd/mm/yy): ")
-            NewClient.Dates = Console.ReadLine
+            Console.ForegroundColor = ConsoleColor.Green
 
+            Console.Write("Date of the booking (dd/mm/yy): ")
+            Console.ForegroundColor = ConsoleColor.Yellow
+            NewClient.Dates = Console.ReadLine
+            Console.ForegroundColor = ConsoleColor.Green
             Console.Write("Time of the booking (hh:mm am/pm): ")
+            Console.ForegroundColor = ConsoleColor.Yellow
             NewClient.time = Console.ReadLine
 
             'Add to the list 
@@ -164,11 +182,11 @@
             Console.WriteLine("Booking details are as follows:")
 
 
-            Console.WriteLine("Name :" & NewClient.Name)
-            Console.WriteLine("Address :" & NewClient.Address)
-            Console.WriteLine("Phone number :" & NewClient.Phone)
-            Console.WriteLine("Date of booking :" & NewClient.Dates)
-            Console.WriteLine("Time of booking :" & NewClient.time)
+            Console.WriteLine("Name : " & NewClient.Name)
+            Console.WriteLine("Address : " & NewClient.Address)
+            Console.WriteLine("Phone number : " & NewClient.Phone)
+            Console.WriteLine("Date of booking : " & NewClient.Dates)
+            Console.WriteLine("Time of booking : " & NewClient.time)
 
             Console.WriteLine("Are these correct? Y/N")
 
@@ -211,6 +229,7 @@
 
             
         End If
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Press any key to return to menu: ")
         Console.ReadKey()
     End Sub
@@ -218,55 +237,65 @@
 
         
         Console.Clear()
-
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Here's the client's currently completed in the program")
 
         Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
+        Console.ForegroundColor = ConsoleColor.Green
         Console.WriteLine("═════════════════════════════════════════════════════════════")
-
+        Console.ForegroundColor = ConsoleColor.Yellow
 
         For i = 0 To clients.Count - 1
             If clients(i).Complete = True Then
                 Console.WriteLine("{0,-5} {1,-20} {2,-20} {3, -20}", i, clients(i).Name, clients(i).Dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
             End If
         Next
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.WriteLine("══════════════════════════════════════════════════════════════")
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Press any key to return to menu...")
         Console.ReadKey()
     End Sub
     Sub CheckIncompleteBookingsForNext7Days()
         If clients.Count = 0 Then
+            Console.ForegroundColor = ConsoleColor.Yellow
             Console.WriteLine("You have no bookings")
             Console.Write("Press any key to exit...")
             Console.ReadKey()
         Else
             Console.Clear()
-
+            Console.ForegroundColor = ConsoleColor.Yellow
             Console.WriteLine("Here's the client's coming up in the next 7 days")
 
             Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
+            Console.ForegroundColor = ConsoleColor.Green
             Console.WriteLine("═════════════════════════════════════════════════════════════")
-
+            Console.ForegroundColor = ConsoleColor.Yellow
 
             For i = 0 To clients.Count - 1
                 If clients(i).Complete = False And clients(i).Dates <= Now.AddDays(7) And clients(i).Dates >= Now Then
                     Console.WriteLine("{0,-5} {1,-20} {2,-20} {3, -20}", i, clients(i).Name, clients(i).Dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
                 End If
             Next
+            Console.ForegroundColor = ConsoleColor.Green
+            Console.WriteLine("══════════════════════════════════════════════════════════════")
         End If
 
-
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Press any key to return to menu...")
         Console.ReadKey()
     End Sub
     Sub ViewIncompleteBookingsDetails()
         Dim index As Integer = GetBookings(False)
         Dim user As Integer
-        Console.WriteLine("Here are your incomplete bookings: ")
+        'Console.WriteLine("Here are your incomplete bookings: ")
 
-        Console.Write("Press -1 to cancel or any other key and enter to continue: ")
+        Console.ForegroundColor = ConsoleColor.Yellow
+        Console.Write("Press -1 to cancel or 0 and enter to continue: ")
         index = Console.ReadLine
         If index = -1 Then
             Menu()
+
         Else
             Console.Write("Enter the index of the client: ")
 
@@ -283,7 +312,7 @@
 
             Console.WriteLine("Time of appointment : " & clients(index).time)
 
-            Console.WriteLine("Press any key to return to menu: ")
+            Console.WriteLine("Press any key to return to menu... ")
 
             Console.ReadKey()
         End If
@@ -293,7 +322,7 @@
     Sub EditIncompleteBookingsDetails()
         Console.Clear()
         Dim index As Integer = GetBookings(False)
-
+        Console.ForegroundColor = ConsoleColor.Yellow
         If index >= 0 And index < clients.Count Then
             Dim selection As Char
             Console.WriteLine("Do you wish to edit a client? Y/N: ")
@@ -329,13 +358,13 @@
     Sub RemoveABooking()
         Console.Clear()
         Dim index As Integer = GetBookings(False)
-
+        Console.ForegroundColor = ConsoleColor.Yellow
 
         Console.Write("Enter the index of the client you wish to remove: ")
 
         index = Console.ReadLine
         If index >= 0 And index < clients.Count Then
-            Console.Write("Do you wish to remove this client? Y/N: ")
+            Console.WriteLine("Do you wish to remove this client? Y/N: ")
             Dim selection As Char
             selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
 
@@ -355,11 +384,12 @@
     End Sub
     Sub CompleteBooking()
         Dim index As Integer = GetBookings(False)
-        Dim user As Integer
+
+        Console.ForegroundColor = ConsoleColor.Yellow
         
         Console.Write("Enter the index of the client: ")
 
-        user = Console.ReadLine
+        index = Console.ReadLine
         Dim newClient As New Client
         If index >= 0 And index < clients.Count Then
 
@@ -384,35 +414,130 @@
     End Sub
     Sub ViewBusinessCard()
         Console.Clear()
-        Console.SetCursorPosition(10, 5)
+
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.SetCursorPosition(15, 9)
         Console.WriteLine("╔══════════════════════════════════════════════╗")
-        Console.SetCursorPosition(10, 6)
+        Console.SetCursorPosition(15, 10)
         Console.WriteLine("║")
-        Console.SetCursorPosition(10, 7)
+        Console.SetCursorPosition(15, 11)
         Console.WriteLine("║")
-        Console.SetCursorPosition(10, 8)
+        Console.SetCursorPosition(15, 12)
         Console.WriteLine("║")
-        Console.SetCursorPosition(10, 9)
+        Console.SetCursorPosition(15, 13)
         Console.WriteLine("║")
-        Console.SetCursorPosition(11, 6)
+        Console.ForegroundColor = ConsoleColor.Yellow
+        Console.SetCursorPosition(17, 10)
         Console.WriteLine("Company: " & company.business)
-        Console.SetCursorPosition(11, 7)
+        Console.SetCursorPosition(17, 11)
         Console.WriteLine("Owner: " & company.name)
-        Console.SetCursorPosition(11, 8)
+        Console.SetCursorPosition(17, 12)
         Console.WriteLine("Phone Number: " & company.number)
-        Console.SetCursorPosition(11, 9)
+        Console.SetCursorPosition(17, 13)
         Console.WriteLine("Address: " & company.address)
-        Console.SetCursorPosition(10, 10)
+        Console.SetCursorPosition(15, 14)
+        Console.ForegroundColor = ConsoleColor.Green
         Console.WriteLine("╚══════════════════════════════════════════════╝")
-        Console.SetCursorPosition(57, 6)
+        Console.SetCursorPosition(62, 10)
         Console.WriteLine("║")
-        Console.SetCursorPosition(57, 7)
+        Console.SetCursorPosition(62, 11)
         Console.WriteLine("║")
-        Console.SetCursorPosition(57, 8)
+        Console.SetCursorPosition(62, 12)
         Console.WriteLine("║")
-        Console.SetCursorPosition(57, 9)
+        Console.SetCursorPosition(62, 13)
         Console.WriteLine("║")
         Console.ReadLine()
+    End Sub
+    
+
+    Sub EditCompanyInfo()
+        Console.Clear()
+
+
+
+
+
+        Console.ForegroundColor = ConsoleColor.Yellow
+        Dim correct As Char
+        Dim choice As Char
+        Dim selection As Char
+        Console.WriteLine("Do you wish to edit your comany? Y/N: ")
+        selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
+        If selection = "Y" Then
+            Console.WriteLine("What Company information would you like to change: ")
+            Console.WriteLine("(A)Company name: " & company.business)
+            Console.WriteLine()
+            Console.WriteLine("(B)Company Owner: " & company.name)
+            Console.WriteLine()
+            Console.WriteLine("(C)Company contact number: " & company.number)
+            Console.WriteLine()
+            Console.WriteLine("(D)Company address: " & company.address)
+            Console.WriteLine()
+            Console.WriteLine("(E)Company hourly rate :$" & company.Rate)
+            Console.WriteLine()
+            Console.WriteLine("(X) Return to menu")
+
+            choice = Console.ReadKey(True).KeyChar.ToString.ToUpper
+            Select Case choice
+
+                Case "A"
+                    Console.Clear()
+                    Console.Write("New company name: ")
+                    company.business = Console.ReadLine
+                    Console.WriteLine("Your new company name is: " & company.business)
+                    ' Console.WriteLine("Y/N")
+                    ' correct = Console.ReadKey(True).KeyChar.ToString.ToUpper
+                    ' If correct = "Y" Then
+                    'Console.WriteLine("You have changed your company's name")
+                    ' Console.WriteLine("Press any key to continue...")
+                    ' saveCompany()
+                    ' Console.ReadKey()
+
+                    ' ElseIf correct = "N" Then
+                    ' Console.WriteLine("Press any key to return to menu...")
+                    ' Console.ReadKey()
+                    'End If
+
+
+                Case "B"
+                    Console.Clear()
+                    Console.Write("New company owner: ")
+                    company.name = Console.ReadLine
+                    Console.WriteLine("Press any key to continue...")
+                    Console.ReadKey()
+                Case "C"
+                    Console.Clear()
+                    Console.Write("New company contact number: ")
+                    company.number = Console.ReadLine
+                    Console.WriteLine("Press any key to continue...")
+                    Console.ReadKey()
+                Case "D"
+                    Console.Clear()
+                    Console.Write("New company address: ")
+                    company.address = Console.ReadLine
+                    Console.WriteLine("Press any key to continue...")
+                    Console.ReadKey()
+                Case "E"
+                    Console.Clear()
+                    Console.Write("New company hourly rate:$")
+                    company.Rate = Console.ReadLine
+                    Console.WriteLine("Press any key to continue...")
+                    Console.ReadKey()
+                Case "X"
+                    Menu()
+            End Select
+            Console.Clear()
+
+
+        ElseIf selection = "N" Then
+
+
+            Console.WriteLine("Press any key to return to menu")
+            Console.ReadKey()
+            Console.Clear()
+
+
+        End If
     End Sub
     Sub Menu()
 
@@ -423,20 +548,24 @@
             Console.ForegroundColor = ConsoleColor.Green
             Console.Clear()
             CompanyInfo()
-
-            Console.WriteLine("Here's todays clients")
+            Console.ForegroundColor = ConsoleColor.Yellow
+            Console.WriteLine("Todays clients")
 
             Console.WriteLine("{0,-5} {1,-20} {2,-15} {3, -15}", "ID", "Name", "Date", "Time")
+            Console.ForegroundColor = ConsoleColor.Green
             Console.WriteLine("═════════════════════════════════════════════════════════════")
-
+            Console.ForegroundColor = ConsoleColor.Yellow
 
             For i = 0 To clients.Count - 1
                 If clients(i).Complete = False And clients(i).Dates <= Now.AddDays(1) And clients(i).Dates >= Now.AddDays(-1) Then
                     Console.WriteLine("{0,-5} {1,-20} {2,-20} {3, -20}", i, clients(i).Name, clients(i).Dates.ToString("dd/MM/yy"), clients(i).time.ToString("hh:mm tt"))
+                Else
+
                 End If
             Next
+            Console.ForegroundColor = ConsoleColor.Green
             Console.WriteLine("═════════════════════════════════════════════════════════════")
-
+            Console.ForegroundColor = ConsoleColor.Yellow
             Console.WriteLine("Select from one of the following menu options:")
             Console.WriteLine()
             Console.WriteLine("(A) Add a booking")
@@ -451,9 +580,11 @@
             Console.WriteLine("(H) Complete a booking")
             Console.WriteLine()
             Console.WriteLine("(I) View business card")
+            Console.WriteLine("(J) Edit company information")
             Console.WriteLine()
             Console.WriteLine("(X) Save and Exit")
-
+            Console.ForegroundColor = ConsoleColor.Green
+            Console.WriteLine("═════════════════════════════════════════════════════════════")
 
             selection = Console.ReadKey(True).KeyChar.ToString.ToUpper
             Select Case selection
@@ -475,7 +606,8 @@
                     CompleteBooking()
                 Case "I"
                     ViewBusinessCard()
-
+                Case "J"
+                    EditCompanyInfo()
 
             End Select
             Console.Clear()
@@ -483,6 +615,7 @@
         saveCompany()
 
         Console.Clear()
+
         Dim savingWord As String = "Saving"
         Dim saving As Integer
         Dim finished As Boolean = False
@@ -497,7 +630,8 @@
             Threading.Thread.Sleep(20)
 
             Console.SetCursorPosition(saving + 34, 10)
-            Console.BackgroundColor = ConsoleColor.Blue
+            Console.BackgroundColor = ConsoleColor.Red
+            Console.ForegroundColor = ConsoleColor.Yellow
 
             'Put down 10 rand numbers
             For i = saving To 5
@@ -510,7 +644,7 @@
             'Check if we hit the threshold
 
             If count = delaycount Then
-                Console.BackgroundColor = ConsoleColor.Red
+                Console.BackgroundColor = ConsoleColor.DarkGreen
                 Console.SetCursorPosition(saving + 34, 10)
                 Console.Write(savingWord(saving))
 
@@ -532,7 +666,7 @@
 
 
         Console.SetCursorPosition(saving + 28, 10)
-        Console.BackgroundColor = ConsoleColor.Red
+        Console.BackgroundColor = ConsoleColor.DarkGreen
 
         Console.WriteLine("Goodbye")
         Threading.Thread.Sleep(1140)
@@ -550,21 +684,17 @@
         Console.BackgroundColor = ConsoleColor.Black
         Console.ForegroundColor = ConsoleColor.Green
         Console.Clear()
-        Console.SetCursorPosition(17, 6)
-        Console.WriteLine("╔════════════════════════════════════════╗")
-        Console.SetCursorPosition(17, 7)
-        Console.WriteLine("║")
         Console.SetCursorPosition(17, 8)
-        Console.WriteLine("║")
+        Console.WriteLine("╔════════════════════════════════════════╗")
         Console.SetCursorPosition(17, 9)
         Console.WriteLine("║")
         Console.SetCursorPosition(17, 10)
         Console.WriteLine("║")
         Console.SetCursorPosition(17, 11)
         Console.WriteLine("║")
-        Console.SetCursorPosition(58, 7)
+        Console.SetCursorPosition(17, 12)
         Console.WriteLine("║")
-        Console.SetCursorPosition(58, 8)
+        Console.SetCursorPosition(17, 13)
         Console.WriteLine("║")
         Console.SetCursorPosition(58, 9)
         Console.WriteLine("║")
@@ -572,14 +702,20 @@
         Console.WriteLine("║")
         Console.SetCursorPosition(58, 11)
         Console.WriteLine("║")
-        Console.SetCursorPosition(23, 8)
+        Console.SetCursorPosition(58, 12)
+        Console.WriteLine("║")
+        Console.SetCursorPosition(58, 13)
+        Console.WriteLine("║")
+        Console.SetCursorPosition(23, 10)
+        Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine("Welcome to Fun With Lawns v0.1")
-        Console.SetCursorPosition(19, 9)
+        Console.SetCursorPosition(19, 11)
         Console.WriteLine("Your all in one lawn management system")
         Console.WriteLine("")
-        Console.SetCursorPosition(24, 10)
+        Console.SetCursorPosition(24, 12)
         Console.WriteLine("Press any key to continue...")
-        Console.SetCursorPosition(17, 12)
+        Console.ForegroundColor = ConsoleColor.Green
+        Console.SetCursorPosition(17, 14)
         Console.WriteLine("╚════════════════════════════════════════╝")
 
         Console.ReadKey()
